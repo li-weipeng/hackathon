@@ -6,5 +6,5 @@
 .git
 library/
 target/
-.idea/
+.idea
 *.iml
