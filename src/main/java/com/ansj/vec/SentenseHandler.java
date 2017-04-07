@@ -1,3 +1,5 @@
+package com.ansj.vec;
+
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +12,7 @@ import com.huaban.analysis.jieba.JiebaSegmenter;
  * Created by liweipeng on 2017/4/7.
  */
 public class SentenseHandler {
-    public float[] getSentenceVerctor(String sentense, Map<String, float[]> wordVectorMap){
+    public static float[] getSentenceVerctor(String sentense, Map<String, float[]> wordVectorMap){
         JiebaSegmenter segmenter = new JiebaSegmenter();
         List<String> sentenseLineWords = segmenter.sentenceProcess(sentense);
         List<String> sentenseUnStopsWords = Lists.newArrayList();

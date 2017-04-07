@@ -25,9 +25,10 @@ public class Word2VEC {
 		BufferedReader strin=new BufferedReader(new InputStreamReader(System.in));
 		while (true)  {
 			System.out.print("请输入一个字符串(-1结束)：");
-			String str = strin.readLine();
-			if (!str.equals("-1")){
-				System.out.println("相近词：" + word2VEC.distance(str));
+			String sentence = strin.readLine();
+			if (!sentence.equals("-1")){
+				float[] sentenceVector = SentenseHandler.getSentenceVerctor(sentence, word2VEC.wordMap);
+				System.out.println("相近词：" + word2VEC.distance(sentence));
 			}else{
 				break;
 			}
