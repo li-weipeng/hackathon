@@ -6,3 +6,4 @@
 .git
 library/
 target/
+.idea/
