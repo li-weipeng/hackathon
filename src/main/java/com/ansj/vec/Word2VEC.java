@@ -28,7 +28,7 @@ public class Word2VEC {
 			String sentence = strin.readLine();
 			if (!sentence.equals("-1")){
 				float[] sentenceVector = SentenseHandler.getSentenceVerctor(sentence, word2VEC.wordMap);
-				System.out.println("相近词：" + word2VEC.distance(sentence));
+				System.out.println("相近词：" + word2VEC.getWordByVector(sentenceVector));
 			}else{
 				break;
 			}
@@ -248,6 +248,34 @@ public class Word2VEC {
 		}
 		result.pollFirst();
 
+		return result;
+	}
+
+	public Set<WordEntry> getWordByVector(float[] center) {
+		if (center == null) {
+			return Collections.emptySet();
+		}
+
+		int resultSize = wordMap.size() < topNSize ? wordMap.size() : topNSize;
+		TreeSet<WordEntry> result = new TreeSet<WordEntry>();
+
+		double min = Float.MIN_VALUE;
+		for (Map.Entry<String, float[]> entry : wordMap.entrySet()) {
+			float[] vector = entry.getValue();
+			float dist = 0;
+			for (int i = 0; i < vector.length; i++) {
+				dist += center[i] * vector[i];
+			}
+
+			if (dist > min) {
+				result.add(new WordEntry(entry.getKey(), dist));
+				if (resultSize < result.size()) {
+					result.pollLast();
+				}
+				min = result.last().score;
+			}
+		}
+		result.pollFirst();
 		return result;
 	}
 
